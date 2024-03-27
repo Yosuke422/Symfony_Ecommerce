@@ -3,10 +3,11 @@
 {% block title %}Produit index{% endblock %}
 
 {% block body %}
+<p>{{app.user.email}}</p>
     <nav>
         <ul>
         <li>
-        <a >Mon Compte</a>
+        <a href = "{{ path('app_compte')}}">Mon Compte</a>
         </li>
         <li>
         <a href = "{{ path('app_contenu_panier_index') }}">Panier</a>
