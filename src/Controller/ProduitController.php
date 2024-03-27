@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Form\ProduitType;
+use App\Entity\ContenuPanier;
+use App\Form\ContenuPanierType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,7 +56,7 @@ class ProduitController extends AbstractController
                   // instead of its contents
                   $produit->setPhoto($newFilename);
               }
-              
+
             $entityManager->persist($produit);
             $entityManager->flush();
 
@@ -67,11 +69,39 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_produit_show', methods: ['GET'])]
-    public function show(Produit $produit): Response
-    {
+    #[Route('/{id}', name: 'app_produit_show', methods: ['GET', 'POST'])]
+    public function show(Produit $produit, EntityManagerInterface $em, Request $request): Response
+    {   
+         // Création d'un objet vide pour le formulaire
+         $addToCart = new ContenuPanier();
+         $addToCart->setDateAjout(new \DateTime()); 
+         // associer l'id du produit dans le panier
+
+            $produit = $em->getRepository(Produit::class)->find($produit->getId());
+            $addToCart->getId($produit);
+
+         // Création du formulaire en utilisant l'objet vide
+         $form = $this->createForm(ContenuPanierType::class, $addToCart);
+         // Analyse la requête HTTP
+         $form->handleRequest($request);
+         if ($form->isSubmitted() && $form->isValid()) {
+ 
+             // Si le formulaire a été soumis et qu'il a passé les vérifications, on le sauverage en base de données
+             $em->persist($addToCart); // Prepare en PDO
+             $em->flush(); // Execute la requête
+             
+             $this->addFlash('success', 'Produit ajoutée au panier');
+             // Redirection vers la list des catégories pour qu'il recharge la liste des catégories
+             return $this->redirectToRoute('app_produit');
+         }
+ 
+         // Récupération de la table categorie
+         $addToCart = $em->getRepository(ContenuPanier::class)->findAll();
+
+         
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
+            'form_addToCart' => $form->createView(),
         ]);
     }
 

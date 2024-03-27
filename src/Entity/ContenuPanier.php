@@ -16,18 +16,18 @@ class ContenuPanier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: 'contenuPaniers')]
-    private Collection $produit;
-
     #[ORM\OneToOne(inversedBy: 'contenuPanier', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Panier $panier = null;
 
     #[ORM\Column]
-    private ?int $quantiter = null;
+    private ?int $quantite = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateAjout = null;
+
+    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: 'contenuPaniers')]
+    private Collection $produit;
 
     public function __construct()
     {
@@ -37,6 +37,42 @@ class ContenuPanier
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(Panier $panier): static
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
+
+    public function getQuantiter(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantiter(int $quantite): static
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getDateAjout(): ?\DateTimeInterface
+    {
+        return $this->dateAjout;
+    }
+
+    public function setDateAjout(\DateTimeInterface $dateAjout): static
+    {
+        $this->dateAjout = $dateAjout;
+
+        return $this;
     }
 
     /**
@@ -59,42 +95,6 @@ class ContenuPanier
     public function removeProduit(Produit $produit): static
     {
         $this->produit->removeElement($produit);
-
-        return $this;
-    }
-
-    public function getPanier(): ?Panier
-    {
-        return $this->panier;
-    }
-
-    public function setPanier(Panier $panier): static
-    {
-        $this->panier = $panier;
-
-        return $this;
-    }
-
-    public function getQuantiter(): ?int
-    {
-        return $this->quantiter;
-    }
-
-    public function setQuantiter(int $quantiter): static
-    {
-        $this->quantiter = $quantiter;
-
-        return $this;
-    }
-
-    public function getDateAjout(): ?\DateTimeInterface
-    {
-        return $this->dateAjout;
-    }
-
-    public function setDateAjout(\DateTimeInterface $dateAjout): static
-    {
-        $this->dateAjout = $dateAjout;
 
         return $this;
     }

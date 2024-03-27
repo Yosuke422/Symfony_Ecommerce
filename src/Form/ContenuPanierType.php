@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ContenuPanierType extends AbstractType
 {
@@ -16,17 +17,8 @@ class ContenuPanierType extends AbstractType
     {
         $builder
             ->add('quantiter')
-            ->add('dateAjout', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('produit', EntityType::class, [
-                'class' => Produit::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-            ->add('panier', EntityType::class, [
-                'class' => Panier::class,
-                'choice_label' => 'id',
+            ->add('AjouterAuPanier', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-primary'],
             ])
         ;
     }
