@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompteController!{% endblock %}
+
+{% block body %}
+ <nav>
+        <ul>
+        <li>
+        <a href = "{{ path('app_produit')}}">produits</a>
+        </li>
+        </ul>
+    </nav>
+
+<div class="example-wrapper">
+<h3>Mon compte</h3>
+<p>email: {{app.user.email}}</p>
+<p>nom: {{app.user.nom}}</p>
+<p>prenom: {{app.user.prenom}}</p>
+
+    <a href="{{ path('app_compte_edit', {'id': app.user.id}) }}">edit</a>
+</div>
+<div>
+<h3>Historique d'achat</h3>
+</div>
+{% endblock %}

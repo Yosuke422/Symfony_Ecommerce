@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Compte{% endblock %}
+
+{% block body %}
+    <h1>Edit Compte</h1>
+
+    {{ include('compte/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_compte') }}">back to list</a>
+
+{% endblock %}
