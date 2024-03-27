@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
 {
@@ -100,6 +101,15 @@ class Produit
     {
         $this->photo = $photo;
 
+        return $this;
+    }
+    
+    #[ORM\PostRemove]
+    public function deleteLogo(): static
+    {
+        if ($this->logo != null) {
+            unlink(__DIR__ . '/../../public/uploads/' . $this->logo);
+        }
         return $this;
     }
 

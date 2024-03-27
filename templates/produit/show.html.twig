@@ -29,12 +29,15 @@
             </tr>
             <tr>
                 <th>Photo</th>
-                <td>{{ produit.photo }}</td>
-            </tr>
+ <td>
+                    {% if produit.photo is not null %}
+                    <img src="{{ asset('uploads/'~ produit.photo)}}" style= "max-width: 100px;">
+                    {% endif %}
+                </td>            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_produit_index') }}">back to list</a>
+    <a href="{{ path('app_produit') }}">back to list</a>
 
     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
 
