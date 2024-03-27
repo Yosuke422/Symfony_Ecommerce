@@ -33,10 +33,15 @@
                     {% if produit.photo is not null %}
                     <img src="{{ asset('uploads/'~ produit.photo)}}" style= "max-width: 100px;">
                     {% endif %}
-                </td>            </tr>
+                </td>            
+                </tr>
         </tbody>
     </table>
-
+    {{ form_start(form_addToCart) }}
+    {{ form_row(form_addToCart.quantiter) }}
+    {{ form_row(form_addToCart.AjouterAuPanier) }}
+    {{ form_end(form_addToCart) }}
+    
     <a href="{{ path('app_produit') }}">back to list</a>
 
     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>

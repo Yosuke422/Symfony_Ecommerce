@@ -10,13 +10,13 @@
         </li>
         </ul>
 </nav>
-    <h1>ContenuPanier index</h1>
+    <h1>ContenuPanier</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Quantiter</th>
+                <th>Photo</th>
+                <th>quantite</th>
                 <th>DateAjout</th>
                 <th>actions</th>
             </tr>
@@ -24,7 +24,11 @@
         <tbody>
         {% for contenu_panier in contenu_paniers %}
             <tr>
-                <td>{{ contenu_panier.id }}</td>
+                    {% for p in contenu_panier.produit %}
+
+                 <td> <img src="{{ asset('uploads/'~ p.photo)}}" style= "max-width: 100px;">
+                 </td>
+                {% endfor %}
                 <td>{{ contenu_panier.quantiter }}</td>
                 <td>{{ contenu_panier.dateAjout ? contenu_panier.dateAjout|date('Y-m-d') : '' }}</td>
                 <td>
