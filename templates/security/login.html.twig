@@ -3,6 +3,13 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+ <nav>
+        <ul>
+        <li>
+        <a href = "{{ path('app_produit') }}">Produits</a>
+        </li>
+        </ul>
+</nav>
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
