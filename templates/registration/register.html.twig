@@ -3,6 +3,13 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+ <nav>
+        <ul>
+        <li>
+        <a href = "{{ path('app_produit') }}">Produits</a>
+        </li>
+        </ul>
+</nav>
     <h1>Register</h1>
 
     {{ form_errors(registrationForm) }}
