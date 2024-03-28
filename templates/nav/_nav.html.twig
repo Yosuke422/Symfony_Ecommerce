@@ -1,5 +1,6 @@
-   <nav>
-        <ul>
+   <div class='navdiv'>
+   <nav class='navGlobal'>
+        <ul  class='navbar'>
         <li><a href = "{{ path('app_produit') }}">Produit</a></li>
         <li>
         <a href = "{{ path('app_contenu_panier_index') }}">Panier</a>
@@ -20,4 +21,12 @@
         </li>
         </ul>
         {% endif %}
+        
     </nav>
+    <div class='email'>
+    {% if app.user is not null %}
+        <p>{{app.user.email}}</p>
+        {% endif %}
+        </div>
+
+    </div>

@@ -4,9 +4,12 @@
 
 {% block body %}
 {{ include('nav/_nav.html.twig') }}
+<div class='form'>
+
     <h1>Modifier le produit</h1>
     <a href="{{ path('app_produit') }}">retour</a>
 
     {{ include('produit/_form.html.twig', {'button_label': 'Update'}) }}
     {{ include('produit/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

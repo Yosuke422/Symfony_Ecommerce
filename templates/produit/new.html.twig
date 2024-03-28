@@ -4,8 +4,10 @@
 
 {% block body %}
 {{ include('nav/_nav.html.twig') }}
+<div class='form'>
     <h1>Créer un produit</h1>
     <a href="{{ path('app_produit') }}">retour</a>
 
     {{ include('produit/_form.html.twig') }}
+    </div>
 {% endblock %}

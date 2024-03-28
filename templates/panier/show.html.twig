@@ -4,10 +4,10 @@
 
 {% block body %}
 {{ include('nav/_nav.html.twig') }}
-
+<div class='form'>
 {% for p in panier.contenuPaniers %}
 {% for q in p.produit %}
-<ul>
+<ul class='compte'>
 <li>{{p.quantiter}}</li>
 <li>{{q.prix}}</li>
 <li>{{q.nom}}</li>
@@ -16,5 +16,5 @@
 {% endfor %}
 {% endfor %}
 <a href="{{ path('app_panier')}}">back</a>
-
+</div>
 {% endblock %}

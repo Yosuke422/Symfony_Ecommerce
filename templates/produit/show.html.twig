@@ -4,6 +4,8 @@
 
 {% block body %}
     {{ include('nav/_nav.html.twig') }}
+    <div class='form'>
+
     <h1>{{ produit.nom }}</h1>
 
     <a href="{{ path('app_produit') }}">retour </a>
@@ -45,4 +47,5 @@
     {% if is_granted('ROLE_ADMIN') %}
     {{ include('produit/_delete_form.html.twig') }}
     {% endif %}
+    </div>
 {% endblock %}

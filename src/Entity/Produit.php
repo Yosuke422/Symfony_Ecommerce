@@ -105,10 +105,10 @@ class Produit
     }
     
     #[ORM\PostRemove]
-    public function deleteLogo(): static
+    public function deletePhoto(): static
     {
-        if ($this->logo != null) {
-            unlink(__DIR__ . '/../../public/uploads/' . $this->logo);
+        if ($this->photo != null) {
+            unlink(__DIR__ . '/../../public/uploads/' . $this->photo);
         }
         return $this;
     }

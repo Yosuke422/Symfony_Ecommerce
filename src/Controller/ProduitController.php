@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Panier;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 #[Route('/produit')]
 class ProduitController extends AbstractController
 {
@@ -157,7 +157,7 @@ class ProduitController extends AbstractController
     }
 
     #[IsGranted('ROLE_ADMIN')]
-    #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->getPayload()->get('_token'))) {

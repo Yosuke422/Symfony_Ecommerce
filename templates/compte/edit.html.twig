@@ -4,11 +4,12 @@
 
 {% block body %}
 {{ include('nav/_nav.html.twig') }}
+<div class='form'>
 
     <h1>Modifier mon compte</h1>
     <a href="{{ path('app_compte') }}">retour</a>
 
     {{ include('compte/_form.html.twig', {'button_label': 'Modifier'}) }}
-
+</div>
 
 {% endblock %}

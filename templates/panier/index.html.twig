@@ -4,12 +4,12 @@
 
 {% block body %}
  {{ include('nav/_nav.html.twig') }}
-
-<a href="{{ path('app_compte')}}">retour</a>
+<div class='form'>
 <h1>Details de ma commande</h1>
+<a href="{{ path('app_compte')}}">retour</a>
 {% for p in panier %}
 {% if p.etat == 1 %}
-<ul>
+<ul class='compte'>
 <li>{{p.utilisateur.nom}}</li>
 <li>{{p.dateDachat|date('d/m/Y H:i:s')}}</li>
 
@@ -18,5 +18,6 @@
 {% endif %}
 {% endfor %}
 
+</div>
 </div>
 {% endblock %}

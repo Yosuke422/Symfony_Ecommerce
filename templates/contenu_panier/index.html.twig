@@ -4,7 +4,7 @@
 
 {% block body %}
      {{ include('nav/_nav.html.twig') }}
-
+<div class='form'>
     <h1>ContenuPanier</h1>
 
     <table class="table">
@@ -42,4 +42,5 @@
             {% for contenu_panier in contenu_paniers %}
             <a href="{{ path('app_contenu_panier_add', {'id': contenu_panier.id}) }}">confirmer</a>
     {% endfor %}
+    </div>
 {% endblock %}

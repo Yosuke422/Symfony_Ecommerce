@@ -3,54 +3,37 @@
 {% block title %}Produit index{% endblock %}
 
 {% block body %}
-{% if app.user is not null %}
-<p>{{app.user.email}}</p>
-{% endif %}
+
     {{ include('nav/_nav.html.twig') }}
-
-    <h1>Selection de produit</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>Photo</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for produit in produits %}
-            <tr>
-                <td>{{ produit.nom }}</td>
-                <td>{{ produit.description }}</td>
-                <td>{{ produit.prix }}</td>
-                <td>{{ produit.stock }}</td>
-                <td>
-                    {% if produit.photo is not null %}
-                    <img src="{{ asset('uploads/'~ produit.photo)}}" style= "max-width: 100px;">
-                    {% endif %}
-                </td>                
-                <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Voir</a>
-                            {% if is_granted('ROLE_ADMIN') %}
-
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
-                        {% endif %}
-
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Aucun produit trouvée</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-        {% if is_granted('ROLE_ADMIN') %}
-
-    <a href="{{ path('app_produit_new') }}">Créer un produit</a>
+    <div class='form'>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class='bouton'href="{{ path('app_produit_new') }}">Créer un produit</a>
     {% endif %}
+    </div>
+    <div class="card-container">
+        {% for produit in produits %}
+            <div class="card">
+                <div class="card-content">
+                    <h2>{{ produit.nom }}</h2>
+                    <p>{{ produit.description }}</p>
+                    <p>Prix: {{ produit.prix }}</p>
+                    <p>Stock: {{ produit.stock }}</p>
+                    {% if produit.photo is not null %}
+                        <img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}">
+                    {% endif %}
+                </div>
+                <div class="card-actions">
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Voir</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun produit trouvé</p>
+        {% endfor %}
+    </div>
+
+    
+    
 {% endblock %}

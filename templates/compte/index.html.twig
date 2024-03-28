@@ -4,10 +4,10 @@
 
 {% block body %}
 {{ include('nav/_nav.html.twig') }}
-
+<div class='form'>
 <div class="example-wrapper">
 <h3>Mon compte</h3>
-<ul>
+<ul class='compte'>
 <li>email: {{app.user.email}}</li>
 <li>nom: {{app.user.nom}}</li>
 <li>prenom: {{app.user.prenom}}</li>
@@ -16,5 +16,6 @@
 </div>
 <div>
 <a href="{{ path('app_panier')}}">Historique d'achat</a>
+</div>
 </div>
 {% endblock %}

@@ -1,0 +1,118 @@
+body{
+    background-color: rgb(46, 40, 40);
+    color: white;
+    height: 100%
+}
+/* nav bar */
+.navdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(18, 16, 16);
+    height: 50px;
+}
+.navGlobal{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+}
+.navbar{
+ display: flex;
+ list-style: none;   
+}
+.navbar li{
+    margin: 0 10px;
+    height: 10px;
+}
+a{
+    text-decoration: none;
+    color: black;
+    background-color: rgb(255, 85, 0);
+    padding: 5px 10px;
+    color: aliceblue;
+    border-radius: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+.btn{
+    background-color: rgb(255, 85, 0);
+    color: aliceblue;
+}
+/* page produit */
+h1{
+    font-size: 2em;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    width: 300px;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgb(18, 16, 16);
+    color: white;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.card-content {
+    margin-bottom: 10px;
+}
+
+.card-actions {
+    text-align: right;
+}
+
+.card-actions a {
+    margin-left: 10px;
+}
+.bouton{
+margin: 30px;}
+form{
+    width: 30%;
+    margin-left: 20%;
+}
+.form{
+    padding: 30px;
+}
+.table {
+    color: white;
+    margin: 10px;
+}
+.table th {
+    color: white;
+    background-color: rgb(18, 16, 16);
+}
+.table td {
+    color: white;
+    background-color: rgb(18, 16, 16);
+}
+.compte{
+    display: flex;
+    flex-direction: column  ;
+    justify-content: center;
+    background-color: rgb(18, 16, 16);
+    margin: 30px;
+    list-style: none;
+    border-radius: 10px;
+    padding: 50px;
+    gap: 10px;
+}
+.email{
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 0px 5px;
+}
