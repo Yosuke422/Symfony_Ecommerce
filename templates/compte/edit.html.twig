@@ -3,10 +3,12 @@
 {% block title %}Edit Compte{% endblock %}
 
 {% block body %}
-    <h1>Edit Compte</h1>
+{{ include('nav/_nav.html.twig') }}
 
-    {{ include('compte/_form.html.twig', {'button_label': 'Update'}) }}
+    <h1>Modifier mon compte</h1>
+    <a href="{{ path('app_compte') }}">retour</a>
 
-    <a href="{{ path('app_compte') }}">back to list</a>
+    {{ include('compte/_form.html.twig', {'button_label': 'Modifier'}) }}
+
 
 {% endblock %}

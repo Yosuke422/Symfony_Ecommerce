@@ -6,14 +6,13 @@
 {% if app.user is not null %}
 <p>{{app.user.email}}</p>
 {% endif %}
-        {{ include('nav/_nav.html.twig') }}
+    {{ include('nav/_nav.html.twig') }}
 
-    <h1>Produit index</h1>
+    <h1>Selection de produit</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Prix</th>
@@ -25,28 +24,33 @@
         <tbody>
         {% for produit in produits %}
             <tr>
-                <td>{{ produit.id }}</td>
                 <td>{{ produit.nom }}</td>
                 <td>{{ produit.description }}</td>
                 <td>{{ produit.prix }}</td>
                 <td>{{ produit.stock }}</td>
- <td>
+                <td>
                     {% if produit.photo is not null %}
                     <img src="{{ asset('uploads/'~ produit.photo)}}" style= "max-width: 100px;">
                     {% endif %}
                 </td>                
                 <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Voir</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+
+                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+                        {% endif %}
+
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucun produit trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+        {% if is_granted('ROLE_ADMIN') %}
 
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+    <a href="{{ path('app_produit_new') }}">Créer un produit</a>
+    {% endif %}
 {% endblock %}

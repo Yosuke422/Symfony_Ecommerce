@@ -3,11 +3,16 @@
 {% block title %}Hello CompteController!{% endblock %}
 
 {% block body %}
+{{ include('nav/_nav.html.twig') }}
+
 {% for p in panier.contenuPaniers %}
 {% for q in p.produit %}
-<p>{{q.nom}}</p>
-<img src="{{ asset('uploads/'~ q.photo)}}" style= "max-width: 100px;">
-
+<ul>
+<li>{{p.quantiter}}</li>
+<li>{{q.prix}}</li>
+<li>{{q.nom}}</li>
+<li><img src="{{ asset('uploads/'~ q.photo)}}" style= "max-width: 100px;"></li>
+</ul>
 {% endfor %}
 {% endfor %}
 <a href="{{ path('app_panier')}}">back</a>

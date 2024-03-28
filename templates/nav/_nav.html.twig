@@ -1,6 +1,6 @@
    <nav>
         <ul>
-        
+        <li><a href = "{{ path('app_produit') }}">Produit</a></li>
         <li>
         <a href = "{{ path('app_contenu_panier_index') }}">Panier</a>
         </li>
@@ -9,14 +9,14 @@
         <a href = "{{ path('app_compte')}}">Mon Compte</a>
         </li>
         <li>
-        <a href = "{{ path('app_logout') }}">logout</a>
+        <a href = "{{ path('app_logout') }}">se déconnecter</a>
         </li>
         {% else %}
          <li>
-        <a href = "{{ path('app_register') }}">register</a>
+        <a href = "{{ path('app_register') }}">Creer un compte</a>
         </li>
          <li>
-        <a href = "{{ path('app_login') }}">login</a>
+        <a href = "{{ path('app_login') }}">se connecter</a>
         </li>
         </ul>
         {% endif %}

@@ -3,18 +3,20 @@
 {% block title %}Hello CompteController!{% endblock %}
 
 {% block body %}
- 
+ {{ include('nav/_nav.html.twig') }}
+
+<a href="{{ path('app_compte')}}">retour</a>
+<h1>Details de ma commande</h1>
 {% for p in panier %}
 {% if p.etat == 1 %}
-<p>{{p.utilisateur.nom}}</p>
-<p>{{p.dateDachat|date('d/m/Y H:i:s')}}</p>
-<p>{{p.etat}}</p>
+<ul>
+<li>{{p.utilisateur.nom}}</li>
+<li>{{p.dateDachat|date('d/m/Y H:i:s')}}</li>
 
-<a href="{{ path('app_panier_show', {'id': p.id} )}}">show</a>
-
+<li><a href="{{ path('app_panier_show', {'id': p.id} )}}">Détails</a></li>
+</ul>
 {% endif %}
 {% endfor %}
 
-<a href="{{ path('app_compte')}}">back</a>
 </div>
 {% endblock %}

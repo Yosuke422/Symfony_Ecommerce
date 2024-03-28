@@ -3,8 +3,11 @@
 {% block title %}ContenuPanier{% endblock %}
 
 {% block body %}
+     {{ include('nav/_nav.html.twig') }}
+
     <h1>ContenuPanier</h1>
 
+    <a href="{{ path('app_contenu_panier_index') }}">retour</a>
     <table class="table">
         <tbody>
             <tr>
@@ -22,7 +25,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_contenu_panier_index') }}">back to list</a>
 
     <a href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">edit</a>
 

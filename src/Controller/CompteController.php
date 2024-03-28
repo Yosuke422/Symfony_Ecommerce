@@ -9,6 +9,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\UpdateCompteType;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CompteController extends AbstractController
 {

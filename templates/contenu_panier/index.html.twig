@@ -3,50 +3,43 @@
 {% block title %}ContenuPanier index{% endblock %}
 
 {% block body %}
- <nav>
-        <ul>
-        <li>
-        <a href = "{{ path('app_produit') }}">Produits</a>
-        </li>
-        </ul>
-</nav>
+     {{ include('nav/_nav.html.twig') }}
+
     <h1>ContenuPanier</h1>
 
     <table class="table">
         <thead>
             <tr>
+                <th>Nom</th>
                 <th>Photo</th>
                 <th>quantite</th>
                 <th>DateAjout</th>
-                <th>actions</th>
+                <th>actions</th>    
             </tr>
         </thead>
         <tbody>
         {% for contenu_panier in contenu_paniers %}
             <tr>
-                    {% for p in contenu_panier.produit %}
-
+                {% for p in contenu_panier.produit %}
+                <td>{{ p.nom }}</td>   
                  <td> <img src="{{ asset('uploads/'~ p.photo)}}" style= "max-width: 100px;">
                  </td>
                 {% endfor %}
                 <td>{{ contenu_panier.quantiter }}</td>
                 <td>{{ contenu_panier.dateAjout ? contenu_panier.dateAjout|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">show</a>
-                    <a href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">edit</a>
+    {{ include('contenu_panier/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">le panier est vide</td>
             </tr>
         {% endfor %}
 
         </tbody>
     </table>
             {% for contenu_panier in contenu_paniers %}
-
             <a href="{{ path('app_contenu_panier_add', {'id': contenu_panier.id}) }}">confirmer</a>
     {% endfor %}
-    <a href="{{ path('app_contenu_panier_new') }}">Create new</a>
 {% endblock %}
