@@ -3,7 +3,9 @@
 {% block title %}Produit index{% endblock %}
 
 {% block body %}
+{% if app.user is not null %}
 <p>{{app.user.email}}</p>
+{% endif %}
     <nav>
         <ul>
         <li>

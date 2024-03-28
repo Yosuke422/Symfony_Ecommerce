@@ -10,15 +10,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Panier;
+
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/contenu/panier')]
 class ContenuPanierController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/', name: 'app_contenu_panier_index', methods: ['GET'])]
-    public function index(ContenuPanierRepository $contenuPanierRepository): Response
+    public function index(ContenuPanierRepository $contenuPanierRepository , EntityManagerInterface $entityManager): Response
     {
+
+          /** @var \App\Entity\User $user */
+          $user = $this->getUser();
+
+        $panierValide = $entityManager->getRepository(Panier::class)->findPanierActif($user);
+
+
+        if($panierValide == null){
+            $panierValide = new Panier();
+            $panierValide->setUtilisateur($user);
+            $panierValide->setEtat(false);
+            $entityManager->persist($panierValide);
+        }
+
         return $this->render('contenu_panier/index.html.twig', [
-            'contenu_paniers' => $contenuPanierRepository->findAll(),
+            'contenu_paniers' => $contenuPanierRepository->findBy(['panier' => $panierValide]),
         ]);
     }
 

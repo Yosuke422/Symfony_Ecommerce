@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Panier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\User;
 
 /**
  * @extends ServiceEntityRepository<Panier>
@@ -21,6 +22,15 @@ class PanierRepository extends ServiceEntityRepository
         parent::__construct($registry, Panier::class);
     }
 
+    public function findPanierActif(User $user)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.utilisateur = :user')
+            ->setParameter('user', $user)
+            ->andWhere('p.etat = false')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
     //    /**
     //     * @return Panier[] Returns an array of Panier objects
     //     */

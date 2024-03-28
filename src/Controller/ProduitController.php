@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Panier;
+
 
 #[Route('/produit')]
 class ProduitController extends AbstractController
@@ -74,11 +76,9 @@ class ProduitController extends AbstractController
     {   
          // Création d'un objet vide pour le formulaire
          $addToCart = new ContenuPanier();
-         $addToCart->setDateAjout(new \DateTime()); 
          // associer l'id du produit dans le panier
 
             $produit = $em->getRepository(Produit::class)->find($produit->getId());
-            $addToCart->getId($produit);
 
          // Création du formulaire en utilisant l'objet vide
          $form = $this->createForm(ContenuPanierType::class, $addToCart);
@@ -103,6 +103,35 @@ class ProduitController extends AbstractController
             'produit' => $produit,
             'form_addToCart' => $form->createView(),
         ]);
+    }
+
+    #[Route('/add/{id}', name: 'app_produit_add', methods: ['GET'])]
+    public function add(Produit $produit, EntityManagerInterface $entityManager): Response
+    {
+        $contenuPanier = new ContenuPanier();
+
+        $contenuPanier->addProduit($produit);
+        $contenuPanier->setQuantiter(1);
+        $contenuPanier->setDateAjout(new \DateTime());
+        //$contenuPanier->setPanier($this->getUser()->getUserPanier());
+
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $panierValide = $entityManager->getRepository(Panier::class)->findPanierActif($user);
+
+        if($panierValide == null){
+            $panierValide = new Panier();
+            $panierValide->setUtilisateur($user);
+            $panierValide->setEtat(false);
+            $entityManager->persist($panierValide);
+        }
+
+        $panierValide->addContenuPanier($contenuPanier);
+        $entityManager->persist($contenuPanier);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_contenu_panier_index');
     }
 
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]

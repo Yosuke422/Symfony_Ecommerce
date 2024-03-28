@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240327152816 extends AbstractMigration
+final class Version20240328093505 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,13 +20,13 @@ final class Version20240327152816 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE contenu_panier RENAME COLUMN quantiter TO quantite');
+        $this->addSql('ALTER TABLE panier ALTER date_dachat DROP NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE contenu_panier RENAME COLUMN quantite TO quantiter');
+        $this->addSql('ALTER TABLE panier ALTER date_dachat SET NOT NULL');
     }
 }

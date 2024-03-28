@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\RegistrationFormType;
+use App\Form\UpdateCompteType;
 
 class CompteController extends AbstractController
 {
@@ -23,7 +23,7 @@ class CompteController extends AbstractController
     #[Route('compte/{id}/edit', name: 'app_compte_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(UpdateCompteType::class, $user);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {

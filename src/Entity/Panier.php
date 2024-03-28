@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PanierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,14 +20,21 @@ class Panier
     #[ORM\JoinColumn(nullable: false)]
     private ?User $utilisateur = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateDachat = null;
 
     #[ORM\Column]
     private ?bool $etat = null;
 
-    #[ORM\OneToOne(mappedBy: 'panier', cascade: ['persist', 'remove'])]
-    private ?ContenuPanier $contenuPanier = null;
+    #[ORM\OneToMany(targetEntity: ContenuPanier::class, mappedBy: 'panier')]
+    private Collection $contenuPaniers;
+
+    public function __construct()
+    {
+        $this->contenuPaniers = new ArrayCollection();
+    }
+
+   
 
     public function getId(): ?int
     {
@@ -68,20 +77,35 @@ class Panier
         return $this;
     }
 
-    public function getContenuPanier(): ?ContenuPanier
+    /**
+     * @return Collection<int, ContenuPanier>
+     */
+    public function getContenuPaniers(): Collection
     {
-        return $this->contenuPanier;
+        return $this->contenuPaniers;
     }
 
-    public function setContenuPanier(ContenuPanier $contenuPanier): static
+    public function addContenuPanier(ContenuPanier $contenuPanier): static
     {
-        // set the owning side of the relation if necessary
-        if ($contenuPanier->getPanier() !== $this) {
+        if (!$this->contenuPaniers->contains($contenuPanier)) {
+            $this->contenuPaniers->add($contenuPanier);
             $contenuPanier->setPanier($this);
         }
 
-        $this->contenuPanier = $contenuPanier;
+        return $this;
+    }
+
+    public function removeContenuPanier(ContenuPanier $contenuPanier): static
+    {
+        if ($this->contenuPaniers->removeElement($contenuPanier)) {
+            // set the owning side to null (unless already changed)
+            if ($contenuPanier->getPanier() === $this) {
+                $contenuPanier->setPanier(null);
+            }
+        }
 
         return $this;
     }
+
+ 
 }
