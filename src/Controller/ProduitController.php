@@ -26,6 +26,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -71,6 +72,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_produit_show', methods: ['GET', 'POST'])]
     public function show(Produit $produit, EntityManagerInterface $em, Request $request): Response
     {   
@@ -105,6 +107,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/add/{id}', name: 'app_produit_add', methods: ['GET'])]
     public function add(Produit $produit, EntityManagerInterface $entityManager): Response
     {
@@ -134,6 +137,7 @@ class ProduitController extends AbstractController
         return $this->redirectToRoute('app_contenu_panier_index');
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
@@ -152,6 +156,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {

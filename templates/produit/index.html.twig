@@ -6,22 +6,8 @@
 {% if app.user is not null %}
 <p>{{app.user.email}}</p>
 {% endif %}
-    <nav>
-        <ul>
-        <li>
-        <a href = "{{ path('app_compte')}}">Mon Compte</a>
-        </li>
-        <li>
-        <a href = "{{ path('app_contenu_panier_index') }}">Panier</a>
-        </li>
-         <li>
-        <a href = "{{ path('app_register') }}">register</a>
-        </li>
-         <li>
-        <a href = "{{ path('app_login') }}">login</a>
-        </li>
-        </ul>
-    </nav>
+        {{ include('nav/_nav.html.twig') }}
+
     <h1>Produit index</h1>
 
     <table class="table">

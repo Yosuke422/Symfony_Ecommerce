@@ -1,0 +1,23 @@
+   <nav>
+        <ul>
+        
+        <li>
+        <a href = "{{ path('app_contenu_panier_index') }}">Panier</a>
+        </li>
+        {% if is_granted('ROLE_USER') %}
+        <li>
+        <a href = "{{ path('app_compte')}}">Mon Compte</a>
+        </li>
+        <li>
+        <a href = "{{ path('app_logout') }}">logout</a>
+        </li>
+        {% else %}
+         <li>
+        <a href = "{{ path('app_register') }}">register</a>
+        </li>
+         <li>
+        <a href = "{{ path('app_login') }}">login</a>
+        </li>
+        </ul>
+        {% endif %}
+    </nav>

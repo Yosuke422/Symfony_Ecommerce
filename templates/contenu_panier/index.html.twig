@@ -41,8 +41,12 @@
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
+
         </tbody>
     </table>
+            {% for contenu_panier in contenu_paniers %}
 
+            <a href="{{ path('app_contenu_panier_add', {'id': contenu_panier.id}) }}">confirmer</a>
+    {% endfor %}
     <a href="{{ path('app_contenu_panier_new') }}">Create new</a>
 {% endblock %}

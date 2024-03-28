@@ -40,6 +40,7 @@ class ContenuPanierController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/new', name: 'app_contenu_panier_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -60,6 +61,7 @@ class ContenuPanierController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_contenu_panier_show', methods: ['GET'])]
     public function show(ContenuPanier $contenuPanier): Response
     {
@@ -68,6 +70,7 @@ class ContenuPanierController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}/edit', name: 'app_contenu_panier_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ContenuPanier $contenuPanier, EntityManagerInterface $entityManager): Response
     {
@@ -86,6 +89,27 @@ class ContenuPanierController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
+    #[Route('/add/{id}', name: 'app_contenu_panier_add', methods: ['GET'])]
+    public function add(ContenuPanier $contenuPanier, EntityManagerInterface $entityManager): Response
+    {
+
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $panierValide = $entityManager->getRepository(Panier::class)->findPanierActif($user);
+
+        if($panierValide != null){
+            $panierValide->setEtat(true);
+            $panierValide->setDateDachat(new \DateTime());
+            $entityManager->persist($panierValide);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_contenu_panier_index');
+    }
+
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_contenu_panier_delete', methods: ['POST'])]
     public function delete(Request $request, ContenuPanier $contenuPanier, EntityManagerInterface $entityManager): Response
     {

@@ -12,6 +12,7 @@ use App\Form\UpdateCompteType;
 
 class CompteController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/compte', name: 'app_compte')]
     public function index(): Response
     {
@@ -19,7 +20,8 @@ class CompteController extends AbstractController
             'controller_name' => 'CompteController',
         ]);
     }
-
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('compte/{id}/edit', name: 'app_compte_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
