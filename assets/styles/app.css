@@ -1,6 +1,6 @@
 body{
-    background-color: rgb(46, 40, 40);
-    color: white;
+    background-color: #ECEBE4;
+    color: orangered;
     height: 100%
 }
 /* nav bar */
@@ -8,7 +8,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(18, 16, 16);
+    background-color: #DADDD8;
     height: 50px;
 }
 .navGlobal{
@@ -27,17 +27,16 @@ body{
 }
 a{
     text-decoration: none;
-    color: black;
-    background-color: rgb(255, 85, 0);
+    color: #FFFFFF;
+    background-color: orangered;
     padding: 5px 10px;
-    color: aliceblue;
     border-radius: 5px;
     width: 100px;
     text-align: center;
 }
 
 .btn{
-    background-color: rgb(255, 85, 0);
+    background-color: orangered;
     color: aliceblue;
 }
 /* page produit */
@@ -56,8 +55,8 @@ h1{
     margin: 10px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgb(18, 16, 16);
-    color: white;
+    background-color: #343534;
+    color: #EEF0F2;
 }
 
 .card img {
@@ -65,7 +64,19 @@ h1{
     height: auto;
     border-radius: 5px;
 }
-
+.divcard{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: auto;
+}
+.card p {
+background-color: #ECEBE4;
+    color: orangered;
+    border-radius: 5px;
+    width: auto;
+    padding: 0px 5px;
+}
 .card-content {
     margin-bottom: 10px;
 }
@@ -92,20 +103,21 @@ form{
 }
 .table th {
     color: white;
-    background-color: rgb(18, 16, 16);
+    background-color: #ECEBE4;
 }
 .table td {
     color: white;
-    background-color: rgb(18, 16, 16);
+    background-color: #ECEBE4;
 }
 .compte{
     display: flex;
     flex-direction: column  ;
     justify-content: center;
-    background-color: rgb(18, 16, 16);
+    background-color: #FFFFFF;
     margin: 30px;
     list-style: none;
     border-radius: 10px;
+    color: orangered;
     padding: 50px;
     gap: 10px;
 }

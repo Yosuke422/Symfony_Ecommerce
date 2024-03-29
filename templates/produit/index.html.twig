@@ -15,9 +15,11 @@
             <div class="card">
                 <div class="card-content">
                     <h2>{{ produit.nom }}</h2>
+                    <div class='divcard'>
                     <p>{{ produit.description }}</p>
                     <p>Prix: {{ produit.prix }}</p>
                     <p>Stock: {{ produit.stock }}</p>
+                    </div>
                     {% if produit.photo is not null %}
                         <img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}">
                     {% endif %}
