@@ -1,5 +1,5 @@
 # Symfony_Ecommerce
 
-Equipe : Youssef Charafeddine 
+Equipe : Youssef Charafeddine, 
          Ayoub Ouahid
          
