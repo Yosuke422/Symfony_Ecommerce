@@ -83,6 +83,8 @@ class ContenuPanierController extends AbstractController
             return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $this -> addFlash('success', 'Le panier a bien été modifié');
+        
         return $this->render('contenu_panier/edit.html.twig', [
             'contenu_panier' => $contenuPanier,
             'form' => $form,
@@ -106,6 +108,8 @@ class ContenuPanierController extends AbstractController
             $entityManager->flush();
         }
 
+        $this -> addFlash('success', 'Le panier a bien été validé');
+
         return $this->redirectToRoute('app_contenu_panier_index');
     }
 
@@ -117,6 +121,8 @@ class ContenuPanierController extends AbstractController
             $entityManager->remove($contenuPanier);
             $entityManager->flush();
         }
+
+        $this -> addFlash('success', 'Le produit a bien été supprimé du panier');
 
         return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
     }

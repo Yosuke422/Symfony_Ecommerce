@@ -134,6 +134,8 @@ class ProduitController extends AbstractController
         $entityManager->persist($contenuPanier);
         $entityManager->flush();
 
+        $this -> addFlash('success', 'Le produit a bien été ajouté au panier');
+
         return $this->redirectToRoute('app_contenu_panier_index');
     }
 
@@ -150,6 +152,8 @@ class ProduitController extends AbstractController
             return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
         }
 
+        $this -> addFlash('success', 'Le produit a bien été modifié');
+
         return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
             'form' => $form,
@@ -164,6 +168,8 @@ class ProduitController extends AbstractController
             $entityManager->remove($produit);
             $entityManager->flush();
         }
+
+        $this -> addFlash('success', 'Le produit a bien été supprimé');
 
         return $this->redirectToRoute('app_produit', [], Response::HTTP_SEE_OTHER);
     }

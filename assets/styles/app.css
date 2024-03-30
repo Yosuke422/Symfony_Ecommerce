@@ -1,5 +1,5 @@
 body{
-    background-color: #ECEBE4;
+    background-color: #faf9f0;
     color: orangered;
     height: 100%
 }
@@ -55,7 +55,7 @@ h1{
     margin: 10px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #343534;
+    background-color: #9a9e9a;
     color: #EEF0F2;
 }
 
@@ -102,11 +102,11 @@ form{
     margin: 10px;
 }
 .table th {
-    color: white;
+    color: black;
     background-color: #ECEBE4;
 }
 .table td {
-    color: white;
+    color: black;
     background-color: #ECEBE4;
 }
 .compte{
